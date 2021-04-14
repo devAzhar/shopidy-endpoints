@@ -3,12 +3,12 @@ import dotenv from "dotenv";
 import fetch from 'node-fetch';
 import bodyParser from "body-parser";
 
-const userName = "a9e15a42a92b29c9e707ce216dbce47a";
-const password = "bef61b5f0e19c9c8f23df5a597da7913";
-const apiURL = `https://${userName}:${password}@novel-concept-designs.myshopify.com/admin/orders.json?created_at_min=[dFrm]&created_at_max=[dTo]&fields=id,email,customer`;
-
 const app = express();
 dotenv.config();
+
+const userName = process.env.userName;
+const password = process.env.password;
+const apiURL = `https://${userName}:${password}@novel-concept-designs.myshopify.com/admin/orders.json?created_at_min=[dFrm]&created_at_max=[dTo]&fields=id,email,customer`;
 
 app.use(function(req, res, next) {
     res.setHeader("Content-Type", "application/json");
