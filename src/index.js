@@ -6,8 +6,8 @@ import bodyParser from "body-parser";
 const app = express();
 dotenv.config();
 
-const userName = process.env.userName;
-const password = process.env.password;
+const userName = process.env.API_User;
+const password = process.env.API_Password;
 const apiURL = `https://${userName}:${password}@novel-concept-designs.myshopify.com/admin/orders.json?created_at_min=[dFrm]&created_at_max=[dTo]&fields=id,email,customer`;
 
 app.use(function(req, res, next) {
