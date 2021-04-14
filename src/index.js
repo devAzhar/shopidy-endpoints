@@ -97,6 +97,7 @@ app.get("/shopify_ordersDO3.asp", async (req, res) => {
 app.listen($PORT, $HOST, () =>
   {
     debugLog("Shopify Proxy starting up...");
+    console.log(apiURL);
     console.log(`Shopify Proxy listening on ${$HOST}:${$PORT}!`);
   }
 );
