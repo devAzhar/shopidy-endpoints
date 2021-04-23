@@ -59,7 +59,12 @@ const getApiResponse = async (days, mins, debug=false) => {
             console.log($url);
         }
 
-        fetch($url).then(d => d.json()).then(d => resolve(d));
+        fetch($url).then(d => d.json()).then(d => {
+            if(debug) {
+                d.url = $url;
+            }
+            resolve(d);
+        });
     });
 };
 
