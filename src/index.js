@@ -39,10 +39,8 @@ Date.prototype.addDays = function(days) {
     return date;
 };
 
-const now = new Date();
-//console.log($url);
-
 const getApiResponse = async (days, mins, debug=false) => {
+    const now = new Date();
     const dteFrm = now.addDays(days+1);
 
     const minF = padString(now.getMinutes() - mins, 2);
