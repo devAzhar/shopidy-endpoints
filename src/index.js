@@ -81,6 +81,11 @@ app.get("/shopify_orders3.asp", async (req, res) => {
     res.send($response);
 });
 
+app.get("/shopify_orders4.asp", async (req, res) => {
+    const $response = await getApiResponse(-1450, 17, req.query.debug==="1");
+    res.send($response);
+});
+
 
 app.get("/shopify_ordersDO.asp", async (req, res) => {
     const $response = await getApiResponse(-365, 20, req.query.debug==="1");
@@ -94,6 +99,11 @@ app.get("/shopify_ordersDO2.asp", async (req, res) => {
 
 app.get("/shopify_ordersDO3.asp", async (req, res) => {
     const $response = await getApiResponse(-1095, 17, req.query.debug==="1");
+    res.send($response);
+});
+
+app.get("/shopify_ordersDO4.asp", async (req, res) => {
+    const $response = await getApiResponse(-1460, 17, req.query.debug==="1");
     res.send($response);
 });
 
