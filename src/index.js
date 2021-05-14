@@ -66,46 +66,71 @@ const getApiResponse = async (days, mins, debug=false) => {
     });
 };
 
-app.get("/shopify_orders.asp", async (req, res) => {
-    const $response = await getApiResponse(-355, 20, req.query.debug==="1");
-    res.send($response);
+const $routes = [];
+
+// Define all route maps here
+$routes.push({route: "/shopify_orders.asp", days: -355, mins: 20});
+$routes.push({route: "/shopify_orders2.asp", days: -720, mins: 17});
+$routes.push({route: "/shopify_orders3.asp", days: -1085, mins: 17});
+$routes.push({route: "/shopify_orders4.asp", days: -1453, mins: 17});
+$routes.push({route: "/shopify_ordersDO.asp", days: -365, mins: 20});
+$routes.push({route: "/shopify_ordersDO2.asp", days: -730, mins: 17});
+$routes.push({route: "/shopify_ordersDO3.asp", days: -1095, mins: 17});
+$routes.push({route: "/shopify_ordersDO4.asp", days: -1463, mins: 17});
+
+// Configure all end-points dynamically based on the route map
+$routes.forEach($route => {
+    console.log($route);
+    
+    app.get($route.route, async (req, res) => {
+        const $response = await getApiResponse($route.days, $route.mins, req.query.debug==="1");
+        res.send($response);
+    });
 });
 
-app.get("/shopify_orders2.asp", async (req, res) => {
-    const $response = await getApiResponse(-720, 17, req.query.debug==="1");
-    res.send($response);
-});
+if(false)
+{
+    app.get("/shopify_orders.asp", async (req, res) => {
+        const $response = await getApiResponse(-355, 20, req.query.debug==="1");
+        res.send($response);
+    });
 
-app.get("/shopify_orders3.asp", async (req, res) => {
-    const $response = await getApiResponse(-1085, 17, req.query.debug==="1");
-    res.send($response);
-});
+    app.get("/shopify_orders2.asp", async (req, res) => {
+        const $response = await getApiResponse(-720, 17, req.query.debug==="1");
+        res.send($response);
+    });
 
-app.get("/shopify_orders4.asp", async (req, res) => {
-    const $response = await getApiResponse(-1450, 17, req.query.debug==="1");
-    res.send($response);
-});
+    app.get("/shopify_orders3.asp", async (req, res) => {
+        const $response = await getApiResponse(-1085, 17, req.query.debug==="1");
+        res.send($response);
+    });
+
+    app.get("/shopify_orders4.asp", async (req, res) => {
+        const $response = await getApiResponse(-1450, 17, req.query.debug==="1");
+        res.send($response);
+    });
 
 
-app.get("/shopify_ordersDO.asp", async (req, res) => {
-    const $response = await getApiResponse(-365, 20, req.query.debug==="1");
-    res.send($response);
-});
+    app.get("/shopify_ordersDO.asp", async (req, res) => {
+        const $response = await getApiResponse(-365, 20, req.query.debug==="1");
+        res.send($response);
+    });
 
-app.get("/shopify_ordersDO2.asp", async (req, res) => {
-    const $response = await getApiResponse(-730, 17, req.query.debug==="1");
-    res.send($response);
-});
+    app.get("/shopify_ordersDO2.asp", async (req, res) => {
+        const $response = await getApiResponse(-730, 17, req.query.debug==="1");
+        res.send($response);
+    });
 
-app.get("/shopify_ordersDO3.asp", async (req, res) => {
-    const $response = await getApiResponse(-1095, 17, req.query.debug==="1");
-    res.send($response);
-});
+    app.get("/shopify_ordersDO3.asp", async (req, res) => {
+        const $response = await getApiResponse(-1095, 17, req.query.debug==="1");
+        res.send($response);
+    });
 
-app.get("/shopify_ordersDO4.asp", async (req, res) => {
-    const $response = await getApiResponse(-1460, 17, req.query.debug==="1");
-    res.send($response);
-});
+    app.get("/shopify_ordersDO4.asp", async (req, res) => {
+        const $response = await getApiResponse(-1460, 17, req.query.debug==="1");
+        res.send($response);
+    });
+}
 
 app.listen($PORT, $HOST, () =>
   {
