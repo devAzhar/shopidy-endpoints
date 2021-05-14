@@ -49,6 +49,8 @@ const getApiResponse = async (days, mins, debug=false) => {
     const dFrm = `${dteFrm.getFullYear()}-${padString(dteFrm.getMonth()+1, 2)}-${padString(dteFrm.getDate(), 2)} ${padString(now.getHours(), 2)}:${minF}:00`;
     const dTo = `${dteFrm.getFullYear()}-${padString(dteFrm.getMonth()+1, 2)}-${padString(dteFrm.getDate(), 2)} ${padString(now.getHours(), 2)}:${minT}:00`;
     
+    debugLog({days, mins, debug});
+    
     const $url = apiURL.replace("[dFrm]", dFrm).replace("[dTo]", dTo);
 
     return new Promise((resolve, reject) => {
@@ -80,60 +82,15 @@ $routes.push({route: "/shopify_ordersDO4.asp", days: -1463, mins: 17});
 
 // Configure all end-points dynamically based on the route map
 $routes.forEach($route => {
-    console.log($route);
+    debugLog($route);
     
     app.get($route.route, async (req, res) => {
-        const $response = await getApiResponse($route.days, $route.mins, req.query.debug==="1");
+        const $response = await getApiResponse($route.days || -355, $route.mins || 17, req.query.debug==="1");
         res.send($response);
     });
 });
 
-if(false)
-{
-    app.get("/shopify_orders.asp", async (req, res) => {
-        const $response = await getApiResponse(-355, 20, req.query.debug==="1");
-        res.send($response);
-    });
-
-    app.get("/shopify_orders2.asp", async (req, res) => {
-        const $response = await getApiResponse(-720, 17, req.query.debug==="1");
-        res.send($response);
-    });
-
-    app.get("/shopify_orders3.asp", async (req, res) => {
-        const $response = await getApiResponse(-1085, 17, req.query.debug==="1");
-        res.send($response);
-    });
-
-    app.get("/shopify_orders4.asp", async (req, res) => {
-        const $response = await getApiResponse(-1450, 17, req.query.debug==="1");
-        res.send($response);
-    });
-
-
-    app.get("/shopify_ordersDO.asp", async (req, res) => {
-        const $response = await getApiResponse(-365, 20, req.query.debug==="1");
-        res.send($response);
-    });
-
-    app.get("/shopify_ordersDO2.asp", async (req, res) => {
-        const $response = await getApiResponse(-730, 17, req.query.debug==="1");
-        res.send($response);
-    });
-
-    app.get("/shopify_ordersDO3.asp", async (req, res) => {
-        const $response = await getApiResponse(-1095, 17, req.query.debug==="1");
-        res.send($response);
-    });
-
-    app.get("/shopify_ordersDO4.asp", async (req, res) => {
-        const $response = await getApiResponse(-1460, 17, req.query.debug==="1");
-        res.send($response);
-    });
-}
-
-app.listen($PORT, $HOST, () =>
-  {
+app.listen($PORT, $HOST, () => {
     debugLog("Shopify Proxy starting up...");
     console.log(apiURL);
     console.log(`Shopify Proxy listening on ${$HOST}:${$PORT}!`);
